@@ -1,0 +1,13 @@
+:root {
+	/* Colours */
+	--colour-primary: #1C77EC;
+	--colour-primary-dark: #105FC5;
+	--colour-secondary: #CCC;
+
+	--colour-failure: #E00D0D;
+	--colour-partial-success: #FFD105;
+	--colour-success: #00B006;
+
+	 /* Dimensions */
+	--nav-height: 82px;
+}

@@ -1,0 +1,17 @@
+@import '../../css/variables.css';
+
+.nav {
+	background-color: var(--colour-primary);
+	border-bottom: 3px solid var(--colour-secondary);
+	color: #FFF;
+	height: var(--nav-height);
+	padding: 1em;
+	text-align: center;
+}
+
+.nav__logo {
+  font-family: 'Amatic SC', cursive;
+	font-weight: 400;
+	letter-spacing: 0.05em;
+  font-size: 3em;
+}

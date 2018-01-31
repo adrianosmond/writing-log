@@ -1,0 +1,20 @@
+@import 'https://fonts.googleapis.com/css?family=Amatic+SC:400';
+@import './variables.css';
+
+html {
+	height: 100%;
+}
+
+body {
+	font-family: Arial, sans-serif;
+	min-height: 100%;
+}
+
+aside section + section {
+	margin-top: 2em;
+}
+
+.app-content {
+	background-color: #F9F9F9;
+	min-height: calc(100vh - var(--nav-height));
+}
