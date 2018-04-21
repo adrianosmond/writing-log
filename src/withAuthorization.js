@@ -1,6 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import { auth } from './lib/firebase';
 import * as routes from './constants/routes';
@@ -9,6 +10,7 @@ const withAuthorization = (authCondition) => (Component) => {
   class WithAuthorization extends React.Component {
     componentDidMount() {
       auth.onAuthStateChanged(authUser => {
+        this.props.onSetAuthUser(authUser)
         if (!authCondition(authUser)) {
           this.props.history.push(routes.NOT_LOGGED_IN);
         }
@@ -16,15 +18,22 @@ const withAuthorization = (authCondition) => (Component) => {
     }
 
     render() {
-      return this.context.authUser ? <Component /> : null;
+      return this.props.authUser ? <Component /> : null;
     }
   }
 
-  WithAuthorization.contextTypes = {
-    authUser: PropTypes.object,
-  };
+  const mapStateToProps = (state) => ({
+    authUser: state.session.authUser,
+  });
 
-  return withRouter(WithAuthorization);
+  const mapDispatchToProps = (dispatch) => ({
+    onSetAuthUser: (authUser) => dispatch({ type: 'AUTH_USER_SET', authUser }),
+  });
+
+  return compose(
+    withRouter,
+    connect(mapStateToProps, mapDispatchToProps),
+  )(WithAuthorization);
 }
 
 export default withAuthorization;

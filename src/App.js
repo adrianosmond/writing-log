@@ -5,7 +5,6 @@ import {
   Switch
 } from 'react-router-dom'
 import * as routes from './constants/routes'
-import withAuthentication from './withAuthentication'
 
 import NotLoggedIn from './containers/NotLoggedIn'
 import Home from './containers/Home'
@@ -26,4 +25,4 @@ const App = () =>
     </article>
   </div>
 
-export default withAuthentication(App)
+export default App

@@ -48,7 +48,7 @@ class LoginForm extends Component {
   render () {
     return (
       <form onSubmit={this.onSubmit.bind(this)}>
-        <h2>Reset your password</h2>
+        <h2>Sign In</h2>
         { this.state.error ? <p>{this.state.error}</p> : null }
         <div>
           <label htmlFor="login-email">Email address:</label>
@@ -59,7 +59,7 @@ class LoginForm extends Component {
           <input id="login-password1" value={this.state.password} onChange={event => this.setState({password: event.target.value})} type="password" />
         </div>
         <button type="submit">Sign in</button>
-        <Link to={routes.PASSWORD_RESET}>Forgot your password?</Link>
+        <p><Link to={routes.PASSWORD_RESET}>Forgot your password?</Link></p>
       </form>
     )
   }

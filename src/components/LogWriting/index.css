@@ -1,0 +1,29 @@
+@import '../../css/variables.css';
+
+.log-writing {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+
+.log-writing__heading {
+	font-family: 'Amatic SC', cursive;
+	font-weight: 400;
+  letter-spacing: 0.05em;
+  font-size: 2em;
+}
+
+.log-writing__input {
+	border: 1px solid var(--colour-secondary);
+	flex-grow: 1;
+	font: inherit;
+	font-family: Georgia, serif;
+	font-size: 18px;
+	line-height: 1.6;
+	margin-top: 1em;
+	min-height: 200px;
+	outline: 0;
+	padding: 1em;
+	width: 100%;
+	max-height: calc(100vh - 164px);
+}

@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
 import withAuthorization from '../../withAuthorization';
 
-import SignOutButton from '../../components/SignOutButton'
+import LogWriting from '../../components/LogWriting';
+
+// import SignOutButton from '../../components/SignOutButton';
 
 class Home extends Component {
   render () {
     return (
-      <div>
-        <p>Welcome. You <strong>are</strong> logged in</p>
-        <SignOutButton />
-      </div>
+      <article className="grid app-content">
+				<main className="grid__col-sm-8">
+					<LogWriting />
+				</main>
+				<aside className="grid__col-sm-4">
+					{/* <Tags writingDate={this.props.routeParams.writingDate}/>
+					<LastSevenDays />
+					<WritingCalendar />
+					<Medals /> */}
+				</aside>
+			</article>
     )
   }
 }
