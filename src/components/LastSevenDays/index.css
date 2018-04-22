@@ -1,0 +1,72 @@
+@import '../../css/variables.css';
+
+.last-seven-days {
+	font-family: 'Amatic SC', cursive;
+	font-weight: 400;
+	letter-spacing: 0.05em;
+}
+
+.last-seven-days__heading {
+	font-family: 'Amatic SC', cursive;
+	font-weight: 400;
+  letter-spacing: 0.05em;
+  font-size: 2em;
+}
+
+.last-seven-days__wrapper {
+	border: 1px solid var(--colour-secondary);
+	margin-top: 1em;
+}
+
+.last-seven-days__day {
+	background-color: #FFF;
+	color: inherit;
+	display: inline-block;
+	text-align: center;
+	text-decoration: none;
+	width: 100% / 7;
+	width: calc(100% / 7);
+}
+
+.last-seven-days__day--goal-not-met {
+	background: linear-gradient(to top, var(--colour-failure) 0, var(--colour-failure) 2px, #FFF 2px);
+}
+
+.last-seven-days__day--goal-nearly-met {
+	background: linear-gradient(to top, var(--colour-partial-success) 0, var(--colour-partial-success) 2px, #FFF 2px);
+}
+
+.last-seven-days__day--goal-met {
+	background: linear-gradient(to top, var(--colour-success) 0, var(--colour-success) 2px, #FFF 2px);
+}
+
+
+.last-seven-days__day-initial {
+	background-color: var(--colour-primary);
+	border-left: 1px solid var(--colour-primary-dark);
+	color: #FFF;
+	font-size: 24px;
+	padding: 0.25em;
+}
+
+.last-seven-days__day-initial .last-seven-days__day:first-child {
+  border-left: 0;
+}
+
+.last-seven-days__num-words {
+	border-left: 1px solid var(--colour-secondary);
+	font-size: 30px;
+	padding: 0.5em 0;
+}
+
+.last-seven-days__num-words .last-seven-days__day:first-child {
+  border-left: 0;
+}
+
+.last-seven-days__streak {
+	font-family: 'Amatic SC', cursive;
+	font-weight: 400;
+	letter-spacing: 0.05em;
+	font-size: 1.5em;
+	margin-top: 0.5em;
+}

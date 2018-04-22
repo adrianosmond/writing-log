@@ -4,9 +4,11 @@ import ReactDOM from 'react-dom'
 import './css/reset.css'
 import './css/elements.css'
 import './css/grid.css'
-import store from './store'
+import configureStore from './store'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
+
+const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
