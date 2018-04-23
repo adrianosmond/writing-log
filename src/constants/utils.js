@@ -13,9 +13,15 @@ const months = [
   'December',
 ];
 
+
+const numDaysPerMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
 const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-const getDayInitial = date => days[new Date(date).getDay()];
+const padWithZero = (number) => {
+  if (number.toString().length === 1) return `0${number}`;
+  return `${number}`;
+};
 
 const countWords = (string) => {
   const trimmed = string.trim();
@@ -23,7 +29,16 @@ const countWords = (string) => {
     trimmed.replace(/\s+/gi, ' ').split(' ').length;
 };
 
+const getDayInitial = date => days[new Date(date).getDay()];
+
 const getMonth = m => months[m];
+
+const getNumDaysInMonth = (month, year) => {
+  if (year % 4 === 0 && month === 1) {
+    return 29;
+  }
+  return numDaysPerMonth[month];
+};
 
 /* eslint-disable no-useless-escape */
 const isValidEmail = (email) => {
@@ -31,11 +46,6 @@ const isValidEmail = (email) => {
   return re.test(String(email).toLowerCase());
 };
 /* eslint-enable no-useless-escape */
-
-const padWithZero = (number) => {
-  if (number.toString().length === 1) return `0${number}`;
-  return `${number}`;
-};
 
 const makeDateString = date =>
   `${date.getFullYear()}-${padWithZero(date.getMonth() + 1)}-${padWithZero(date.getDate())}`;
@@ -57,9 +67,11 @@ const makeDateText = (date) => {
 
 export {
   countWords,
-  isValidEmail,
   getDayInitial,
+  getNumDaysInMonth,
   getMonth,
+  isValidEmail,
   makeDateString,
   makeDateText,
+  padWithZero,
 };

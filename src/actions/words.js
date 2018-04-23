@@ -113,9 +113,11 @@ export function setWordCounts(wordCounts) {
   };
 }
 
-export function loadWordCounts(user, limit) {
+export function loadWordCounts(user, limit = null) {
   return (dispatch) => {
-    database.ref(`users/${user}/wordcount/`).limitToLast(limit).once('value', (result) => {
+    let ref = database.ref(`users/${user}/wordcount/`);
+    if (limit) ref = ref.limitToLast(limit);
+    ref.once('value', (result) => {
       const wordCounts = result.val();
       if (wordCounts) {
         dispatch(setWordCounts(wordCounts));

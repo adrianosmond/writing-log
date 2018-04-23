@@ -3,6 +3,7 @@ import withAuthorization from '../../withAuthorization';
 
 import LogWriting from '../../components/LogWriting';
 import LastSevenDays from '../../components/LastSevenDays';
+import Calendar from '../../components/Calendar';
 
 // import SignOutButton from '../../components/SignOutButton';
 
@@ -16,7 +17,7 @@ const Log = ({ match }) => {
       <aside className="grid__col-sm-4">
         {/* <Tags writingDate={this.props.routeParams.writingDate}/> */}
         <LastSevenDays />
-        {/* <WritingCalendar /> */}
+        <Calendar />
         {/* <Medals /> */}
       </aside>
     </article>

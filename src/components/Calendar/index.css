@@ -1,0 +1,101 @@
+.calendar {
+}
+
+.calendar__heading {
+  font-family: 'Amatic SC', cursive;
+	font-weight: 400;
+	letter-spacing: 0.05em;
+  font-size: 2em;
+}
+
+.calendar__wrapper {
+	margin-top: 1em;
+}
+
+.calendar__month {
+  font-family: 'Amatic SC', cursive;
+	font-weight: 400;
+	letter-spacing: 0.05em;
+  font-size: 1.5em;
+	display: flex;
+	background-color: var(--colour-primary);
+	color: #fff;
+}
+
+.calendar__change-month {
+	font-family: 'Amatic SC', cursive;
+	font-weight: 400;
+	letter-spacing: 0.05em;
+	font-size: 1.5em;
+	padding: 0 0.5em;
+	margin: 0;
+	border: 0;
+	outline: 0;
+	background-color: transparent;
+	color: #fff;
+	cursor: pointer;
+}
+
+.calendar__change-month:disabled {
+  opacity: 0.3;
+  cursor: auto;
+}
+
+.calendar__month-name {
+	padding: 0.5em 0;
+	flex-grow: 1;
+	text-align: center;
+}
+
+.calendar__weekdays {
+	display: flex;
+	border-top: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+}
+
+.calendar__days {
+	display: flex;
+	flex-wrap: wrap;
+	border-left: 1px solid #ccc;
+}
+
+.calendar__weekday,
+.calendar__day {
+	width: calc(100% / 7);
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	text-align: center;
+}
+
+.calendar__weekday {
+	font-family: 'Amatic SC', cursive;
+	font-weight: 400;
+	letter-spacing: 0.05em;
+	padding: 0.5em 0;
+	background-color: #eee;
+}
+
+.calendar__day {
+  font-family: 'Amatic SC', cursive;
+	font-weight: 400;
+	letter-spacing: 0.05em;
+	font-size: 1.3em;
+	padding: 0.5em 0;
+	background-color: #fff;
+}
+
+.calendar__day--active,
+.calendar__day--today {
+	background-color: var(--colour-primary);
+	color: #fff;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.calendar__day--today {
+	background-color: var(--colour-primary-dark);
+}
+
+.calendar__day--different-month {
+	color: #ccc;
+}
