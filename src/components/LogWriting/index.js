@@ -41,15 +41,19 @@ class LogWriting extends Component {
 
   componentWillReceiveProps(newProps) {
     if (newProps.writingDate !== this.props.writingDate) {
-      this.saveProgress();
+      if (this.props.writingDate === LogWriting.defaultProps.writingDate) {
+        this.saveProgress();
+      }
+
+      clearTimeout(this.state.timeout);
 
       this.setState({
-        loading: true,
         dateText: makeDateText(newProps.writingDate),
+        timeout: null,
       });
 
       newProps.loadWords(newProps.user, newProps.writingDate);
-    } else {
+    } else if (this.props.loading && !newProps.loading) {
       const newWords = newProps.words[newProps.writingDate];
       const newWordCount = countWords(newWords);
       this.setState({
@@ -101,7 +105,8 @@ class LogWriting extends Component {
           className="log-writing__input"
           value={this.state.words}
           onChange={this.handleChange.bind(this)}
-          disabled={this.state.loading}
+          disabled={this.props.loading ||
+            this.props.writingDate !== LogWriting.defaultProps.writingDate}
           />
       </section>
     );

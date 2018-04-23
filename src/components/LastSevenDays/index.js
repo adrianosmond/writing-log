@@ -43,6 +43,7 @@ class LastSevenDays extends Component {
       wordCount: newProps.wordCount[day.date] || 0,
     }));
 
+    // TODO - Streak won't go above 8 days with this implementation
     this.setState({
       lastSevenDays,
       streak: (lastSevenDays[0].wordCount > GOAL_TARGET ? 1 : 0) +
@@ -71,7 +72,7 @@ class LastSevenDays extends Component {
               className += ' last-seven-days__day--goal-met';
             }
             return day.wordCount > 0 || idx === 0 ? (
-              <Link to={idx === 0 ? '/home/' : `/history/${day.date}`}
+              <Link to={idx === 0 ? '/log/' : `/log/${day.date}`}
                 className={className} key={day.date}>
                 <Day dayName={getDayInitial(day.date)} wordCount={day.wordCount} />
               </Link>

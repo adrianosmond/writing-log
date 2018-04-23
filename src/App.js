@@ -1,15 +1,15 @@
-import React from 'react'
+import React from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  Switch
-} from 'react-router-dom'
-import * as routes from './constants/routes'
+  Switch,
+} from 'react-router-dom';
+import * as routes from './constants/routes';
 
-import NotLoggedIn from './containers/NotLoggedIn'
-import Home from './containers/Home'
-import PasswordReset from './containers/PasswordReset'
-import Nav from './components/Nav'
+import NotLoggedIn from './containers/NotLoggedIn';
+import Log from './containers/Log';
+import PasswordReset from './containers/PasswordReset';
+import Nav from './components/Nav';
 
 const App = () =>
   <div>
@@ -18,11 +18,11 @@ const App = () =>
       <Router>
         <Switch>
           <Route exact path={routes.NOT_LOGGED_IN} component={NotLoggedIn} />
-          <Route exact path={routes.LOGGED_IN} component={Home} />
-          <Route exact path={routes.PASSWORD_RESET} component={PasswordReset} />
+          <Route path={routes.LOGGED_IN} component={Log} />
+          <Route path={routes.PASSWORD_RESET} component={PasswordReset} />
         </Switch>
       </Router>
     </article>
-  </div>
+  </div>;
 
-export default App
+export default App;

@@ -49,6 +49,8 @@ const makeDateText = (date) => {
     suffix = 'st';
   } else if (dayMod10 === 2 && day !== 12) {
     suffix = 'nd';
+  } else if (dayMod10 === 3 && day !== 13) {
+    suffix = 'rd';
   }
   return `${day + suffix} ${getMonth(d.getMonth())} ${d.getFullYear()}`;
 };

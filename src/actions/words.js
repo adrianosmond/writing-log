@@ -20,7 +20,7 @@ export function setWords(date, words) {
 export function loadWords(user, date) {
   return (dispatch) => {
     dispatch(setLoading(true));
-    database.ref(`users/${user}/words/${date}`).on('value', (result) => {
+    database.ref(`users/${user}/words/${date}`).once('value', (result) => {
       const words = result.val() || '';
       dispatch(setWords(date, words));
       dispatch(setLoading(false));
