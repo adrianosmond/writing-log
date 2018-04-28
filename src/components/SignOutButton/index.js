@@ -1,9 +1,9 @@
-import React from 'react'
-import { auth } from '../../lib/firebase'
+import React from 'react';
+import { auth } from '../../lib/firebase';
 
 const SignOutButton = () =>
   <button type="button" onClick={() => auth.signOut()}>
     Sign Out
-  </button>
+  </button>;
 
-export default SignOutButton
+export default SignOutButton;

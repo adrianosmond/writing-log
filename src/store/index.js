@@ -8,6 +8,6 @@ const store = function configureStore(initialState) {
     initialState,
     applyMiddleware(thunk),
   );
-}
+};
 
 export default store;

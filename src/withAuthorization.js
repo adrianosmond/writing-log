@@ -10,9 +10,10 @@ const withAuthorization = authCondition => (Component) => {
   class WithAuthorization extends React.Component {
     componentDidMount() {
       auth.onAuthStateChanged((user) => {
-        this.props.onSetUser(user.uid);
         if (!authCondition(user)) {
           this.props.history.push(routes.NOT_LOGGED_IN);
+        } else {
+          this.props.onSetUser(user.uid);
         }
       });
     }

@@ -1,47 +1,46 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import { isValidEmail } from '../../constants/utils'
-import { auth } from '../../lib/firebase'
-import * as routes from '../../constants/routes'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { isValidEmail } from '../../constants/utils';
+import { auth } from '../../lib/firebase';
+import * as routes from '../../constants/routes';
 
 const INITIAL_STATE = {
   email: '',
   sent: false,
-  error: null
-}
+  error: null,
+};
 
 class PasswordReset extends Component {
   constructor(props) {
-    super(props)
-    this.state = { ...INITIAL_STATE }
+    super(props);
+    this.state = { ...INITIAL_STATE };
   }
 
   onSubmit(event) {
-    event.preventDefault()
+    event.preventDefault();
 
     if (!isValidEmail(this.state.email)) {
       this.setState({
-        error: 'Please enter a valid email address'
-      })
-      return
+        error: 'Please enter a valid email address',
+      });
+      return;
     }
 
     auth.sendPasswordResetEmail(this.state.email)
       .then(() => {
         this.setState({
           ...INITIAL_STATE,
-          sent: true
-         });
+          sent: true,
+        });
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState({
-          error: error.message
+          error: error.message,
         });
       });
-
   }
 
-  render () {
+  render() {
     return (
       <div className="grid">
         <div className="grid__col--sm-12">
@@ -56,15 +55,15 @@ class PasswordReset extends Component {
               { this.state.error ? <p>{this.state.error}</p> : null }
               <div>
                 <label htmlFor="password-reset-email">Email:</label>
-                <input value={this.state.email} onChange={(event) => this.setState({email: event.target.value})} type="email" />
+                <input value={this.state.email} onChange={event => this.setState({ email: event.target.value })} type="email" />
               </div>
               <button type="submit">Reset password</button>
             </form>
           }
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default PasswordReset
+export default PasswordReset;

@@ -17,6 +17,6 @@ const NotLoggedIn = () =>
         <RegisterForm />
       </div>
     </div>
-  </div>
+  </div>;
 
 export default NotLoggedIn;
