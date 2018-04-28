@@ -4,6 +4,8 @@ import { auth } from '../../lib/firebase';
 import * as routes from '../../constants/routes';
 import { isValidEmail } from '../../constants/utils';
 
+import '../../css/form.css';
+
 const INITIAL_STATE = {
   email: '',
   password1: '',
@@ -56,22 +58,22 @@ class RegisterForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.onSubmit.bind(this)}>
-        <h2>Sign up</h2>
-        { this.state.error ? <p>{this.state.error}</p> : null }
-        <div>
-          <label htmlFor="register-email">Email address:</label>
-          <input id="register-email" value={this.state.email} onChange={event => this.setState({ email: event.target.value })} type="email" />
+      <form onSubmit={this.onSubmit.bind(this)} className="form">
+        <h2 className="form__heading">Sign up</h2>
+        { this.state.error ? <p className="form__error">{this.state.error}</p> : null }
+        <div className="form__row">
+          <label className="form__label" htmlFor="register-email">Email address:</label>
+          <input className="form__input" id="register-email" value={this.state.email} onChange={event => this.setState({ email: event.target.value })} type="email" />
         </div>
-        <div>
-          <label htmlFor="register-password1">Password:</label>
-          <input id="register-password1" value={this.state.password1} onChange={event => this.setState({ password1: event.target.value })} type="password" />
+        <div className="form__row">
+          <label className="form__label" htmlFor="register-password1">Password:</label>
+          <input className="form__input" id="register-password1" value={this.state.password1} onChange={event => this.setState({ password1: event.target.value })} type="password" />
         </div>
-        <div>
-          <label htmlFor="register-password2">Confirm Password:</label>
-          <input id="register-password2" value={this.state.password2} onChange={event => this.setState({ password2: event.target.value })} type="password" />
+        <div className="form__row">
+          <label className="form__label" htmlFor="register-password2">Confirm Password:</label>
+          <input className="form__input" id="register-password2" value={this.state.password2} onChange={event => this.setState({ password2: event.target.value })} type="password" />
         </div>
-        <button type="submit">Sign up</button>
+        <button className="form__button" type="submit">Sign up</button>
       </form>
     );
   }

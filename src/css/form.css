@@ -1,0 +1,53 @@
+@import './variables.css';
+
+.form {
+  background-color: #fff;
+  padding: 1em;
+}
+
+.form__heading {
+  font-family: 'Amatic SC', cursive;
+	font-weight: 400;
+  letter-spacing: 0.05em;
+  font-size: 2em;
+}
+
+.form__row {
+  margin-top: 1em;
+}
+
+.form__label {
+  display: block;
+  font-family: Georgia, serif;
+}
+
+.form__input {
+  display: block;
+  width: 100%;
+  margin-top: 0.5em;
+  padding: 0.5em;
+  font: inherit;
+  font-family: Georgia, serif;
+}
+
+.form__button {
+  display: block;
+  width: 100%;
+  margin: 1em 0 0;
+  padding: 0.25em 0.5em;
+  font-family: 'Amatic SC', cursive;
+	font-weight: 400;
+  letter-spacing: 0.05em;
+  font-size: 1.5em;
+  color: #fff;
+  background-color: var(--colour-primary);
+}
+
+.form__link {
+  margin-top: 1em;
+}
+
+.form__error {
+  margin-top: 1em;
+  color: var(--colour-failure);
+}

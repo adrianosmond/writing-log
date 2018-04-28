@@ -1,17 +1,16 @@
 import React from 'react';
-import LoginForm from '../../components/LoginForm';
 import RegisterForm from '../../components/RegisterForm';
 
-const NotLoggedIn = () =>
+const Register = () =>
   <div>
     <div className="grid">
     </div>
     <div className="grid">
       <div className="grid__col-sm-3 grid__col-md-4" />
       <div className="grid__col-sm-6 grid__col-md-4">
-        <LoginForm />
+        <RegisterForm />
       </div>
     </div>
   </div>;
 
-export default NotLoggedIn;
+export default Register;
