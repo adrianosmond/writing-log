@@ -49,16 +49,16 @@ class Tags extends Component {
       <section className="tags">
         <h1 className="tags__heading">
           Tags
-          <Link to="/tags/" className="tags__all-tags-link">View all tags</Link>
+          {/* <Link to="/tags/" className="tags__all-tags-link">View all tags</Link> */}
         </h1>
         <input className="tags__input" placeholder="Add a tag" onKeyDown={this.handleInput.bind(this)} />
         <div className="tags__list">
           {this.state.tags.map((tag, idx) => (
-            <Link to={`/tags/${tag}`} className="tags__tag" key={idx}>
+            <div to={`/tags/${tag}`} className="tags__tag" key={idx}>
               {tag}
               <button className="tags__remove-tag-button"
                 onClick={this.removeTag.bind(this, tag)}>&times;</button>
-            </Link>
+            </div>
           ))}
         </div>
       </section>

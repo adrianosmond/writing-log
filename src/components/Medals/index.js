@@ -40,7 +40,10 @@ class Medals extends Component {
     const total = totalWords + wordsToday;
     return (
       <section className="medals">
-        <h1 className="medals__heading">Medals <Link to="/medals/" className="medals__all-medals-link">View all medals</Link></h1>
+        <h1 className="medals__heading">
+          Medals
+          {/* <Link to="/medals/" className="medals__all-medals-link">View all medals</Link> */}
+        </h1>
         <div className="medals__wrapper">
           <Medal title="Streak" type="streak"
             level={getLevelLongestStreak(longestStreak)} detail={`${longestStreak} day${longestStreak === 1 ? '' : 's'}`} />
