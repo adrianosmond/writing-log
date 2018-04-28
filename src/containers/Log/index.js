@@ -2,6 +2,7 @@ import React from 'react';
 import withAuthorization from '../../withAuthorization';
 
 import LogWriting from '../../components/LogWriting';
+import Tags from '../../components/Tags';
 import LastSevenDays from '../../components/LastSevenDays';
 import Calendar from '../../components/Calendar';
 import Medals from '../../components/Medals';
@@ -20,14 +21,14 @@ const Log = ({ match }) => {
         <LogWriting writingDate={writingDate} />
       </main>
       <aside className="app__sidebar grid__col-sm-4">
-        {/* <Tags writingDate={this.props.routeParams.writingDate}/> */}
+        <Tags writingDate={writingDate}/>
         <LastSevenDays />
         <Calendar />
         <Medals writingDate={writingDate} />
       </aside>
     </article>
   );
-}
+};
 
 const authCondition = authUser => !!authUser;
 

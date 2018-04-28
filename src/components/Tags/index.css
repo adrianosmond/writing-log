@@ -1,0 +1,77 @@
+@import '../../css/variables.css';
+
+.tags {
+
+}
+
+.tags__heading {
+	font-family: 'Amatic SC', cursive;
+	font-weight: 400;
+  letter-spacing: 0.05em;
+  font-size: 2em;
+}
+
+.tags__input {
+	margin-top: 1em;
+	padding: 0.5em;
+	outline: 0;
+	width: 100%;
+	border: 1px solid #ccc;
+	border-radius: 0;
+	font: inherit;
+	font-family: Georgia, serif;
+	font-size: 16px;
+	line-height: 1.6;
+}
+
+.tags__list {
+	margin-top: 1em;
+}
+
+.tags__list:empty {
+  display: none;
+}
+
+.tags__tag {
+	font-family: 'Amatic SC', cursive;
+	font-weight: 400;
+  letter-spacing: 0.05em;
+  font-size: 1.5em;
+	position: relative;
+	display: inline-block;
+	padding: 0.25em;
+	margin-right: 0.5em;
+	background-color: var(--colour-primary);
+	color: #fff;
+	text-decoration: none;
+}
+
+.tags__remove-tag-button {
+	position: absolute;
+	z-index: 1;
+	top: -0.75rem;
+	right: -0.75rem;
+	width: 1.5rem;
+	height: 1.5rem;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	outline: 0;
+	background-color: #fff;
+	color: var(--colour-primary);
+	font-size: 1.5rem;
+	line-height: 1;
+	cursor: pointer;
+	opacity: 0;
+}
+
+.tags__tag:hover .tags__remove-tag-button {
+  opacity: 1;
+}
+
+.tags__all-tags-link {
+	float: right;
+	font-size: 0.6666em;
+	margin-top: 0.3em;
+	color: var(--colour-primary);
+}
