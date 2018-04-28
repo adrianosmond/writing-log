@@ -1,0 +1,8 @@
+@import '../../css/variables.css';
+
+.app {}
+
+.app__sidebar {
+  height: calc(100vh - var(--nav-height));
+  overflow-y: scroll;
+}

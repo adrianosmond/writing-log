@@ -28,7 +28,16 @@ class Medals extends Component {
   }
 
   render() {
-    const { longestStreak, maxWords, totalWords } = this.props;
+    const {
+      longestStreak,
+      maxWords,
+      totalWords,
+      wordCount,
+      writingDate,
+    } = this.props;
+    const wordsToday = wordCount[writingDate] || 0;
+    const max = Math.max(maxWords, wordsToday);
+    const total = totalWords + wordsToday;
     return (
       <section className="medals">
         <h1 className="medals__heading">Medals <Link to="/medals/" className="medals__all-medals-link">View all medals</Link></h1>
@@ -36,9 +45,9 @@ class Medals extends Component {
           <Medal title="Streak" type="streak"
             level={getLevelLongestStreak(longestStreak)} detail={`${longestStreak} day${longestStreak === 1 ? '' : 's'}`} />
           <Medal title="Max words" type="max-words"
-            level={getLevelMaxWords(maxWords)} detail={`${maxWords} word${maxWords === 1 ? '' : 's'}`} />
+            level={getLevelMaxWords(max)} detail={`${max} word${max === 1 ? '' : 's'}`} />
           <Medal title="Total words" type="total-words"
-            level={getLevelTotalWords(totalWords)} detail={`${totalWords} word${totalWords === 1 ? '' : 's'}`} />
+            level={getLevelTotalWords(total)} detail={`${total} word${total === 1 ? '' : 's'}`} />
         </div>
       </section>
     );

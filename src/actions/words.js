@@ -30,13 +30,17 @@ export function loadWords(user, date) {
 
 export function saveWords(user, date, words) {
   return () => {
-    database.ref(`users/${user}/words/${date}`).set(words);
+    let processedWords = words.trim();
+    if (processedWords.length === 0) {
+      processedWords = null;
+    }
+    database.ref(`users/${user}/words/${date}`).set(processedWords);
   };
 }
 
 export function saveLongestStreak(user, longestStreak) {
   return () => {
-    database.ref(`users/${user}/longeststreak/`).set(longestStreak);
+    database.ref(`users/${user}/longestStreak/`).set(longestStreak);
   };
 }
 
@@ -49,16 +53,19 @@ export function setLongestStreak(longestStreak) {
 
 export function loadLongestStreak(user) {
   return (dispatch) => {
-    database.ref(`users/${user}/longeststreak/`).once('value', (result) => {
+    database.ref(`users/${user}/longestStreak/`).once('value', (result) => {
       const longestStreak = result.val() || 0;
       dispatch(setLongestStreak(longestStreak));
     });
   };
 }
 
-export function checkLongestStreak(user, streakToCheck) {
+export function checkLongestStreak(user, streakStart, streakEnd) {
   return (dispatch) => {
-    database.ref(`users/${user}/longeststreak/`).once('value', (result) => {
+    const streakStartTime = new Date(streakStart).getTime();
+    const streakEndTime = new Date(streakEnd).getTime();
+    const streakToCheck = 1 + ((streakEndTime - streakStartTime) / DAY_IN_MS);
+    database.ref(`users/${user}/longestStreak/`).once('value', (result) => {
       const longestStreak = result.val() || 0;
       if (streakToCheck > longestStreak) {
         dispatch(setLongestStreak(streakToCheck));
@@ -70,19 +77,19 @@ export function checkLongestStreak(user, streakToCheck) {
 
 export function removeStreak(user) {
   return () => {
-    database.ref(`users/${user}/streaksince/`).set(null);
+    database.ref(`users/${user}/streakSince/`).set(null);
   };
 }
 
-export function setStreak(user, date) {
+export function saveStreak(user, date) {
   return () => {
-    database.ref(`users/${user}/streaksince/`).set(date);
+    database.ref(`users/${user}/streakSince/`).set(date);
   };
 }
 
 export function calculateStreak(user, wordCounts) {
   return (dispatch) => {
-    database.ref(`users/${user}/streaksince/`).once('value', (result) => {
+    database.ref(`users/${user}/streakSince/`).once('value', (result) => {
       const streakStart = result.val();
       const dateKeys = Object.keys(wordCounts);
 
@@ -90,12 +97,12 @@ export function calculateStreak(user, wordCounts) {
       if (dateKeys.length < 2) return;
 
       const yesterdayDate = makeDateString(new Date(new Date().getTime() - DAY_IN_MS));
-      const yesterdayCount = dateKeys[yesterdayDate] || 0;
+      const yesterdayCount = wordCounts[yesterdayDate] || 0;
 
       if (streakStart === null) {
         // if we don't have a streak yet, check to see if we need to set one up
         if (yesterdayCount >= GOAL_TARGET) {
-          dispatch(setStreak(user, yesterdayDate));
+          dispatch(saveStreak(user, yesterdayDate));
         }
       // if we have a streak, check to see if we need to end it
       } else if (yesterdayCount < GOAL_TARGET) {
@@ -105,11 +112,11 @@ export function calculateStreak(user, wordCounts) {
         const previousSessionDate = dateKeys[dateKeys.length - 1];
         const previousSessionCount = wordCounts[previousSessionDate] || 0;
         if (previousSessionCount > GOAL_TARGET) {
-          const streakStartTime = new Date(streakStart).getTime();
-          const streakEndTime = new Date(previousSessionDate).getTime();
-          const longestStreak = 1 + ((streakEndTime - streakStartTime) / DAY_IN_MS);
-          dispatch(checkLongestStreak(user, longestStreak));
+          dispatch(checkLongestStreak(user, streakStart, previousSessionDate));
         }
+      // if we are continuing a streak, we can still update the longest streak
+      } else if (yesterdayCount > GOAL_TARGET) {
+        dispatch(checkLongestStreak(user, streakStart, yesterdayDate));
       }
     });
   };
@@ -117,7 +124,7 @@ export function calculateStreak(user, wordCounts) {
 
 export function saveMaxWords(user, maxWords) {
   return () => {
-    database.ref(`users/${user}/maxwords/`).set(maxWords);
+    database.ref(`users/${user}/maxWords/`).set(maxWords);
   };
 }
 
@@ -130,28 +137,29 @@ export function setMaxWords(user, maxWords) {
 
 export function loadMaxWords(user) {
   return (dispatch) => {
-    database.ref(`users/${user}/maxwords/`).once('value', (result) => {
-      const maxWords = result.val() || 0;
-      dispatch(setMaxWords(user, maxWords));
-    });
-  };
-}
-
-export function checkMaxWords(user, maxWordsToCheck) {
-  return (dispatch) => {
-    database.ref(`users/${user}/maxwords/`).once('value', (result) => {
-      const maxWords = result.val() || 0;
-      if (maxWordsToCheck > maxWords) {
-        dispatch(setMaxWords(maxWordsToCheck));
-        dispatch(saveMaxWords(user, maxWordsToCheck));
+    Promise.all([
+      database.ref(`users/${user}/maxWords/`)
+        .once('value').then(result => result.val() || 0),
+      database.ref(`users/${user}/wordCount/`).limitToLast(2)
+        .once('value').then(result => result.val()),
+    ]).then((results) => {
+      const maxWords = results[0];
+      const wordCounts = results[1];
+      const result = Math.max(...Object.values(wordCounts), maxWords);
+      dispatch(setMaxWords(user, result));
+      if (result > maxWords) {
+        dispatch(saveMaxWords(user, result));
       }
     });
   };
 }
 
-export function saveTotalWords(user, totalWords) {
+export function saveTotalWords(user, totalWords, date) {
   return () => {
-    database.ref(`users/${user}/totalwords/`).set(totalWords);
+    database.ref(`users/${user}/totalWords/`).set({
+      count: totalWords,
+      upTo: date,
+    });
   };
 }
 
@@ -164,9 +172,23 @@ export function setTotalWords(user, totalWords) {
 
 export function loadTotalWords(user) {
   return (dispatch) => {
-    database.ref(`users/${user}/totalwords/`).once('value', (result) => {
-      const totalWords = result.val() || 0;
-      dispatch(setTotalWords(user, totalWords));
+    const today = makeDateString(new Date());
+    Promise.all([
+      database.ref(`users/${user}/totalWords/`)
+        .once('value').then(result => result.val() || ({ count: 0, upTo: '' })),
+      database.ref(`users/${user}/wordCount/`).limitToLast(2)
+        .once('value').then(result => result.val()),
+    ]).then((results) => {
+      const totalWords = results[0];
+      const wordCounts = results[1];
+      const filtered = Object.keys(wordCounts).filter(date =>
+        date !== today && date > totalWords.upTo);
+      const result = filtered.reduce((total, date) =>
+        total + wordCounts[date], totalWords.count);
+      dispatch(setTotalWords(user, result));
+      if (filtered.length > 0) {
+        dispatch(saveTotalWords(user, result, filtered[0]));
+      }
     });
   };
 }
@@ -188,7 +210,7 @@ export function setWordCounts(wordCounts) {
 
 export function loadWordCounts(user, limit = null) {
   return (dispatch) => {
-    let ref = database.ref(`users/${user}/wordcount/`);
+    let ref = database.ref(`users/${user}/wordCount/`);
     if (limit) ref = ref.limitToLast(limit);
     ref.once('value', (result) => {
       const wordCounts = result.val();
@@ -204,7 +226,7 @@ export function loadWordCounts(user, limit = null) {
 
 // export function loadWordCount(user, date) {
 //   return (dispatch) => {
-//     database.ref(`users/${user}/wordcount/${date}`).once('value', (result) => {
+//     database.ref(`users/${user}/wordCount/${date}`).once('value', (result) => {
 //       const numWords = result.val() || 0;
 //       dispatch(setWordCount(date, numWords));
 //     });
@@ -213,6 +235,6 @@ export function loadWordCounts(user, limit = null) {
 
 export function saveWordCount(user, date, numWords) {
   return () => {
-    database.ref(`users/${user}/wordcount/${date}`).set(numWords);
+    database.ref(`users/${user}/wordCount/${date}`).set(numWords === 0 ? null : numWords);
   };
 }

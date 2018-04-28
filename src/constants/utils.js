@@ -67,15 +67,15 @@ export const getLevelMaxWords = (maxWords) => {
 };
 
 export const getLevelTotalWords = (totalWords) => {
-  if (totalWords >= 100000) {
+  if (totalWords >= 250000) {
     return 6;
-  } else if (totalWords >= 50000) {
+  } else if (totalWords >= 100000) {
     return 5;
-  } else if (totalWords >= 20000) {
+  } else if (totalWords >= 50000) {
     return 4;
-  } else if (totalWords >= 10000) {
+  } else if (totalWords >= 25000) {
     return 3;
-  } else if (totalWords >= 5000) {
+  } else if (totalWords >= 10000) {
     return 2;
   } else if (totalWords >= 1000) {
     return 1;

@@ -10,14 +10,16 @@ import Medals from '../../components/Medals';
 
 import { makeDateString } from '../../constants/utils';
 
+import './index.css';
+
 const Log = ({ match }) => {
   const writingDate = match.params.writingDate || makeDateString(new Date());
   return (
-    <article className="grid app-content">
-      <main className="grid__col-sm-8">
+    <article className="app grid app-content">
+      <main className="app__main grid__col-sm-8">
         <LogWriting writingDate={writingDate} />
       </main>
-      <aside className="grid__col-sm-4">
+      <aside className="app__sidebar grid__col-sm-4">
         {/* <Tags writingDate={this.props.routeParams.writingDate}/> */}
         <LastSevenDays />
         <Calendar />
