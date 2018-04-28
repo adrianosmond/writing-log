@@ -34,6 +34,40 @@ export function saveWords(user, date, words) {
   };
 }
 
+export function saveLongestStreak(user, longestStreak) {
+  return () => {
+    database.ref(`users/${user}/longeststreak/`).set(longestStreak);
+  };
+}
+
+export function setLongestStreak(longestStreak) {
+  return {
+    type: 'SET_LONGEST_STREAK',
+    longestStreak,
+  };
+}
+
+export function loadLongestStreak(user) {
+  return (dispatch) => {
+    database.ref(`users/${user}/longeststreak/`).once('value', (result) => {
+      const longestStreak = result.val() || 0;
+      dispatch(setLongestStreak(longestStreak));
+    });
+  };
+}
+
+export function checkLongestStreak(user, streakToCheck) {
+  return (dispatch) => {
+    database.ref(`users/${user}/longeststreak/`).once('value', (result) => {
+      const longestStreak = result.val() || 0;
+      if (streakToCheck > longestStreak) {
+        dispatch(setLongestStreak(streakToCheck));
+        dispatch(saveLongestStreak(user, streakToCheck));
+      }
+    });
+  };
+}
+
 export function removeStreak(user) {
   return () => {
     database.ref(`users/${user}/streaksince/`).set(null);
@@ -43,23 +77,6 @@ export function removeStreak(user) {
 export function setStreak(user, date) {
   return () => {
     database.ref(`users/${user}/streaksince/`).set(date);
-  };
-}
-
-export function setLongestStreak(user, streakLength) {
-  return () => {
-    database.ref(`users/${user}/longeststreak/`).set(streakLength);
-  };
-}
-
-export function checkLongestStreak(user, streakLength) {
-  return (dispatch) => {
-    database.ref(`users/${user}/longeststreak/`).once('value', (result) => {
-      const longestStreak = result.val();
-      if (streakLength > longestStreak) {
-        dispatch(setLongestStreak(user, streakLength));
-      }
-    });
   };
 }
 
@@ -90,10 +107,66 @@ export function calculateStreak(user, wordCounts) {
         if (previousSessionCount > GOAL_TARGET) {
           const streakStartTime = new Date(streakStart).getTime();
           const streakEndTime = new Date(previousSessionDate).getTime();
-          const streakLength = 1 + ((streakEndTime - streakStartTime) / DAY_IN_MS);
-          dispatch(checkLongestStreak(user, streakLength));
+          const longestStreak = 1 + ((streakEndTime - streakStartTime) / DAY_IN_MS);
+          dispatch(checkLongestStreak(user, longestStreak));
         }
       }
+    });
+  };
+}
+
+export function saveMaxWords(user, maxWords) {
+  return () => {
+    database.ref(`users/${user}/maxwords/`).set(maxWords);
+  };
+}
+
+export function setMaxWords(user, maxWords) {
+  return {
+    type: 'SET_MAX_WORDS',
+    maxWords,
+  };
+}
+
+export function loadMaxWords(user) {
+  return (dispatch) => {
+    database.ref(`users/${user}/maxwords/`).once('value', (result) => {
+      const maxWords = result.val() || 0;
+      dispatch(setMaxWords(user, maxWords));
+    });
+  };
+}
+
+export function checkMaxWords(user, maxWordsToCheck) {
+  return (dispatch) => {
+    database.ref(`users/${user}/maxwords/`).once('value', (result) => {
+      const maxWords = result.val() || 0;
+      if (maxWordsToCheck > maxWords) {
+        dispatch(setMaxWords(maxWordsToCheck));
+        dispatch(saveMaxWords(user, maxWordsToCheck));
+      }
+    });
+  };
+}
+
+export function saveTotalWords(user, totalWords) {
+  return () => {
+    database.ref(`users/${user}/totalwords/`).set(totalWords);
+  };
+}
+
+export function setTotalWords(user, totalWords) {
+  return {
+    type: 'SET_TOTAL_WORDS',
+    totalWords,
+  };
+}
+
+export function loadTotalWords(user) {
+  return (dispatch) => {
+    database.ref(`users/${user}/totalwords/`).once('value', (result) => {
+      const totalWords = result.val() || 0;
+      dispatch(setTotalWords(user, totalWords));
     });
   };
 }

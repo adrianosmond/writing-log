@@ -1,0 +1,171 @@
+@import '../../css/variables.css';
+
+.medals {
+
+}
+
+.medals__heading {
+	font-family: 'Amatic SC', cursive;
+	font-weight: 400;
+	letter-spacing: 0.05em;
+  font-size: 2em;
+}
+
+.medals__wrapper {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.medals__medal {
+  width: calc(100% / 3);
+	margin-top: 1em;
+	text-align: center;
+}
+
+@media (min-width: 768px) and (max-width: 999px) {
+  .medals__medal {
+    width: 50%;
+  }
+}
+
+.medals__title {
+	font-family: 'Amatic SC', cursive;
+	font-weight: 400;
+	letter-spacing: 0.05em;
+	font-size: 1.5em;
+}
+
+.medals__detail {
+	font-family: 'Amatic SC', cursive;
+	font-weight: 400;
+	letter-spacing: 0.05em;
+	font-size: 1.3em;
+}
+
+.medals__icon .level-text {
+  font-family: 'Amatic SC', cursive;
+	font-weight: 400;
+  letter-spacing: 0;
+}
+
+.medals__icon--streak .rear-band {
+  fill: #e64a19;
+}
+
+.medals__icon--streak .front-band {
+  fill: #ff754c;
+}
+
+.medals__icon--streak .front-band-shadow {
+  fill: #c93d18;
+}
+
+.medals__icon--total-words .rear-band {
+		fill: #79e619;
+	}
+
+.medals__icon--total-words .front-band {
+		fill: #9fff4c;
+	}
+
+.medals__icon--total-words .front-band-shadow {
+		fill: #6ec918;
+	}
+
+.medals__icon--max-words .rear-band {
+		fill: #1972e6;
+	}
+
+.medals__icon--max-words .front-band {
+		fill: #4c9aff;
+	}
+
+.medals__icon--max-words .front-band-shadow {
+		fill: #1868c9;
+	}
+
+.medals__icon--level-1 .outer-circle,
+.medals__icon--level-1 .level-text {
+  fill: #eaeaea;
+}
+
+.medals__icon--level-1 .inner-circle {
+  fill: #fff;
+}
+
+.medals__icon--level-2 .outer-circle,
+.medals__icon--level-2 .level-text {
+  fill: #af8a77;
+}
+
+.medals__icon--level-2 .inner-circle {
+  fill: #ceb1a1;
+}
+
+.medals__icon--level-3 .outer-circle,
+.medals__icon--level-3 .level-text {
+  fill: #C97F18;
+}
+
+.medals__icon--level-3 .inner-circle {
+  fill: #E6B110;
+}
+
+.medals__icon--level-4 .outer-circle,
+.medals__icon--level-4 .level-text {
+  fill: #BABCCC;
+}
+
+.medals__icon--level-4 .inner-circle {
+  fill: #D3D5E3;
+}
+
+.medals__icon--level-5 .outer-circle,
+.medals__icon--level-5 .level-text {
+  fill: #ffba57;
+}
+
+.medals__icon--level-5 .inner-circle {
+  fill: #ffe082;
+}
+
+.medals__icon--level-6 .outer-circle {
+  fill: url(#bow);
+  transform: rotate(45deg);
+  transform-origin: 50% 50%;
+}
+.medals__icon--level-6 .level-text {
+  fill: rgba(0,0,0,0.3);
+}
+
+.medals__icon--level-6 .inner-circle {
+  fill: rgba(0,0,0,0.1);
+}
+
+.medals__icon--level-0  .rear-band {
+  fill: #e3e3e3;
+}
+
+.medals__icon--level-0 .front-band {
+  fill: #ddd;
+}
+
+.medals__icon--level-0 .front-band-shadow {
+  fill: #ccc;
+}
+
+.medals__icon--level-0 .outer-circle,
+.medals__icon--level-0 .level-text {
+  fill: #e6e6e6;
+}
+
+.medals__icon--level-0 .inner-circle {
+  fill: #f7f7f7;
+}
+
+.medals__all-medals-link {
+  float: right;
+	font-size: 0.6666em;
+	margin-top: 0.3em;
+	color: var(--colour-primary);
+}

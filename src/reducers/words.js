@@ -2,6 +2,9 @@ const INITIAL_STATE = {
   loading: true,
   words: {},
   wordCount: {},
+  longestStreak: 0,
+  maxWords: 0,
+  totalWords: 0,
 };
 
 function wordsReducer(state = INITIAL_STATE, action) {
@@ -30,6 +33,21 @@ function wordsReducer(state = INITIAL_STATE, action) {
 
     case 'SET_WORD_COUNTS': {
       newState.wordCount = Object.assign({}, newState.wordCount, action.wordCounts);
+      return newState;
+    }
+
+    case 'SET_LONGEST_STREAK': {
+      newState.longestStreak = action.longestStreak;
+      return newState;
+    }
+
+    case 'SET_MAX_WORDS': {
+      newState.maxWords = action.maxWords;
+      return newState;
+    }
+
+    case 'SET_TOTAL_WORDS': {
+      newState.totalWords = action.totalWords;
       return newState;
     }
 

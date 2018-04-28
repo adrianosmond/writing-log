@@ -4,11 +4,14 @@ import withAuthorization from '../../withAuthorization';
 import LogWriting from '../../components/LogWriting';
 import LastSevenDays from '../../components/LastSevenDays';
 import Calendar from '../../components/Calendar';
+import Medals from '../../components/Medals';
 
 // import SignOutButton from '../../components/SignOutButton';
 
+import { makeDateString } from '../../constants/utils';
+
 const Log = ({ match }) => {
-  const { writingDate } = match.params;
+  const writingDate = match.params.writingDate || makeDateString(new Date());
   return (
     <article className="grid app-content">
       <main className="grid__col-sm-8">
@@ -18,7 +21,7 @@ const Log = ({ match }) => {
         {/* <Tags writingDate={this.props.routeParams.writingDate}/> */}
         <LastSevenDays />
         <Calendar />
-        {/* <Medals /> */}
+        <Medals writingDate={writingDate} />
       </aside>
     </article>
   );
