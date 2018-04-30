@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Medal from '../Medal';
 
 import { loadLongestStreak, loadMaxWords, loadTotalWords } from '../../actions/words';
-import { levelTypes, longestStreakLevels, totalWordLevels, maxWordLevels } from '../../constants/constants';
+import { levelTypes, LONGEST_STREAK_LEVELS, TOTAL_WORD_LEVELS, MAX_WORD_LEVELS } from '../../constants/constants';
 
 import './index.css';
 
@@ -12,25 +12,25 @@ class MedalList extends Component {
   constructor(props) {
     super(props);
 
-    longestStreakLevels.pop();
-    maxWordLevels.pop();
-    totalWordLevels.pop();
+    LONGEST_STREAK_LEVELS.pop();
+    MAX_WORD_LEVELS.pop();
+    TOTAL_WORD_LEVELS.pop();
 
     this.state = {
       medals: {
         longestStreak: {
           title: 'Longest streak',
-          values: longestStreakLevels,
+          values: LONGEST_STREAK_LEVELS,
           unit: 'day',
         },
         maxWords: {
           title: 'Max words',
-          values: maxWordLevels,
+          values: MAX_WORD_LEVELS,
           unit: 'word',
         },
         totalWords: {
           title: 'Total words',
-          values: totalWordLevels,
+          values: TOTAL_WORD_LEVELS,
           unit: 'word',
         },
       },

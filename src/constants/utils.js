@@ -1,11 +1,11 @@
 import {
-  months,
-  numDaysPerMonth,
-  days,
-  levels,
-  longestStreakLevels,
-  maxWordLevels,
-  totalWordLevels,
+  MONTHS_IN_YEAR,
+  DAYS_IN_MONTH,
+  DAYS_OF_WEEK,
+  MEDAL_LEVEL_TEXTS,
+  LONGEST_STREAK_LEVELS,
+  MAX_WORD_LEVELS,
+  TOTAL_WORD_LEVELS,
 } from './constants';
 
 export const padWithZero = (number) => {
@@ -19,28 +19,28 @@ export const countWords = (string) => {
     trimmed.replace(/\s+/gi, ' ').split(' ').length;
 };
 
-export const getDayInitial = date => days[new Date(date).getDay()];
+export const getDayInitial = date => DAYS_OF_WEEK[new Date(date).getDay()];
 
 export const getGreaterIndex = (arr, val) => arr.findIndex(x => x > val);
 
 export const getLevelLongestStreak = longestStreak =>
-  getGreaterIndex(longestStreakLevels, longestStreak);
+  getGreaterIndex(LONGEST_STREAK_LEVELS, longestStreak);
 
 export const getLevelMaxWords = maxWords =>
-  getGreaterIndex(maxWordLevels, maxWords);
+  getGreaterIndex(MAX_WORD_LEVELS, maxWords);
 
 export const getLevelTotalWords = totalWords =>
-  getGreaterIndex(totalWordLevels, totalWords);
+  getGreaterIndex(TOTAL_WORD_LEVELS, totalWords);
 
-export const getLevelText = level => levels[level];
+export const getLevelText = level => MEDAL_LEVEL_TEXTS[level];
 
-export const getMonth = m => months[m];
+export const getMonth = m => MONTHS_IN_YEAR[m];
 
 export const getNumDaysInMonth = (month, year) => {
   if (year % 4 === 0 && month === 1) {
     return 29;
   }
-  return numDaysPerMonth[month];
+  return DAYS_IN_MONTH[month];
 };
 
 /* eslint-disable no-useless-escape */
