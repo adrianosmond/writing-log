@@ -4,18 +4,9 @@ import { connect } from 'react-redux';
 import Medal from '../Medal';
 
 import { loadLongestStreak, loadMaxWords, loadTotalWords } from '../../actions/words';
-import { longestStreakLevels, totalWordLevels, maxWordLevels } from '../../constants/utils';
+import { levelTypes, longestStreakLevels, totalWordLevels, maxWordLevels } from '../../constants/constants';
 
 import './index.css';
-
-const levelTypes = [
-  'Paper',
-  'Wood',
-  'Bronze',
-  'Silver',
-  'Gold',
-  'Rainbow',
-];
 
 class MedalList extends Component {
   constructor(props) {

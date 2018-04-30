@@ -1,23 +1,12 @@
-const months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
-
-const numDaysPerMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
-const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-const levels = ['?', 'I', 'II', 'III', 'IV', 'V', 'VI'];
+import {
+  months,
+  numDaysPerMonth,
+  days,
+  levels,
+  longestStreakLevels,
+  maxWordLevels,
+  totalWordLevels,
+} from './constants';
 
 export const padWithZero = (number) => {
   if (number.toString().length === 1) return `0${number}`;
@@ -34,17 +23,11 @@ export const getDayInitial = date => days[new Date(date).getDay()];
 
 export const getGreaterIndex = (arr, val) => arr.findIndex(x => x > val);
 
-export const longestStreakLevels = [2, 3, 7, 14, 28, 50, Number.MAX_SAFE_INTEGER];
-
 export const getLevelLongestStreak = longestStreak =>
   getGreaterIndex(longestStreakLevels, longestStreak);
 
-export const maxWordLevels = [300, 500, 750, 1000, 1500, 2500, Number.MAX_SAFE_INTEGER];
-
 export const getLevelMaxWords = maxWords =>
   getGreaterIndex(maxWordLevels, maxWords);
-
-export const totalWordLevels = [1000, 10000, 25000, 50000, 100000, 250000, Number.MAX_SAFE_INTEGER];
 
 export const getLevelTotalWords = totalWords =>
   getGreaterIndex(totalWordLevels, totalWords);
