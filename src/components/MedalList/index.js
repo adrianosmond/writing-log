@@ -12,6 +12,8 @@ class MedalList extends Component {
   constructor(props) {
     super(props);
 
+    // Remove the last value from each of the levels
+    // as it contains Number.MAX_SAFE_INTEGER
     LONGEST_STREAK_LEVELS.pop();
     MAX_WORD_LEVELS.pop();
     TOTAL_WORD_LEVELS.pop();
