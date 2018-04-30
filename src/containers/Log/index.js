@@ -1,4 +1,5 @@
 import React from 'react';
+
 import withAuthorization from '../../withAuthorization';
 
 import LogWriting from '../../components/LogWriting';

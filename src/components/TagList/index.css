@@ -1,0 +1,51 @@
+.tag-list {
+
+}
+
+.tag-list__heading {
+	font-family: 'Amatic SC', cursive;
+	font-weight: 400;
+  letter-spacing: 0.05em;
+  font-size: 3em;
+}
+
+.tag-list__tag {
+	margin-top: 1em;
+	padding: 1em;
+	border: 1px solid #ccc;
+	background-color: #fff;
+}
+
+.tag-list__tag-heading {
+	font-family: 'Amatic SC', cursive;
+	font-weight: 400;
+  letter-spacing: 0.05em;
+  font-size: 2em;
+}
+
+.tag-list__list {
+	margin-top: 1em;
+}
+
+.tag-list__list-item {
+	margin-top: 1em;
+}
+
+.tag-list__tag-link {
+	font-family: 'Amatic SC', cursive;
+	font-weight: 400;
+  letter-spacing: 0.05em;
+  font-size: 1.5em;
+	margin-top: 1em;
+	color: var(--colour-primary);
+}
+
+.tag-list__all-tags-link {
+  float: right;
+	margin-top: 0.3em;
+  font-family: 'Amatic SC', cursive;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  font-size: 2em;
+	color: var(--colour-primary);
+}

@@ -22,6 +22,13 @@ function tagsReducer(state = INITIAL_STATE, action) {
       return newState;
     }
 
+    case 'SET_ALL_TAGS': {
+      newState.tags = {
+        ...action.tags,
+      };
+      return newState;
+    }
+
     case 'ADD_TAG_TO_DATE': {
       newState.tagDates = {
         ...newState.tagDates,

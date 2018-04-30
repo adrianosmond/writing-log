@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { loadTagsForDate, addTag, removeTag } from '../../actions/tags';
+import * as routes from '../../constants/routes';
 
 import './index.css';
 
@@ -49,16 +50,16 @@ class Tags extends Component {
       <section className="tags">
         <h1 className="tags__heading">
           Tags
-          {/* <Link to="/tags/" className="tags__all-tags-link">View all tags</Link> */}
+          <Link to={routes.TAGS} className="tags__all-tags-link">View all tags</Link>
         </h1>
         <input className="tags__input" placeholder="Add a tag" onKeyDown={this.handleInput.bind(this)} />
         <div className="tags__list">
           {this.state.tags.map((tag, idx) => (
-            <div to={`/tags/${tag}`} className="tags__tag" key={idx}>
+            <Link to={`${routes.TAGS}/${tag}`} className="tags__tag" key={idx}>
               {tag}
               <button className="tags__remove-tag-button"
                 onClick={this.removeTag.bind(this, tag)}>&times;</button>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
