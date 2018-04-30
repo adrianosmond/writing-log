@@ -48,39 +48,39 @@
   letter-spacing: 0;
 }
 
-.medals__icon--streak .rear-band {
+.medals__icon--longestStreak .rear-band {
   fill: #e64a19;
 }
 
-.medals__icon--streak .front-band {
+.medals__icon--longestStreak .front-band {
   fill: #ff754c;
 }
 
-.medals__icon--streak .front-band-shadow {
+.medals__icon--longestStreak .front-band-shadow {
   fill: #c93d18;
 }
 
-.medals__icon--total-words .rear-band {
+.medals__icon--totalWords .rear-band {
 		fill: #79e619;
 	}
 
-.medals__icon--total-words .front-band {
+.medals__icon--totalWords .front-band {
 		fill: #9fff4c;
 	}
 
-.medals__icon--total-words .front-band-shadow {
+.medals__icon--totalWords .front-band-shadow {
 		fill: #6ec918;
 	}
 
-.medals__icon--max-words .rear-band {
+.medals__icon--maxWords .rear-band {
 		fill: #1972e6;
 	}
 
-.medals__icon--max-words .front-band {
+.medals__icon--maxWords .front-band {
 		fill: #4c9aff;
 	}
 
-.medals__icon--max-words .front-band-shadow {
+.medals__icon--maxWords .front-band-shadow {
 		fill: #1868c9;
 	}
 
@@ -131,8 +131,8 @@
 
 .medals__icon--level-6 .outer-circle {
   fill: url(#bow);
-  transform: rotate(45deg);
-  transform-origin: 50% 50%;
+  /* transform: rotate(45deg);
+  transform-origin: 50% 50%; */
 }
 .medals__icon--level-6 .level-text {
   fill: rgba(0,0,0,0.3);

@@ -32,56 +32,22 @@ export const countWords = (string) => {
 
 export const getDayInitial = date => days[new Date(date).getDay()];
 
-export const getLevelLongestStreak = (longestStreak) => {
-  if (longestStreak >= 50) {
-    return 6;
-  } else if (longestStreak >= 28) {
-    return 5;
-  } else if (longestStreak >= 14) {
-    return 4;
-  } else if (longestStreak >= 7) {
-    return 3;
-  } else if (longestStreak >= 3) {
-    return 2;
-  } else if (longestStreak >= 2) {
-    return 1;
-  }
-  return 0;
-};
+export const getGreaterIndex = (arr, val) => arr.findIndex(x => x > val);
 
-export const getLevelMaxWords = (maxWords) => {
-  if (maxWords >= 2500) {
-    return 6;
-  } else if (maxWords >= 1500) {
-    return 5;
-  } else if (maxWords >= 1000) {
-    return 4;
-  } else if (maxWords >= 750) {
-    return 3;
-  } else if (maxWords >= 500) {
-    return 2;
-  } else if (maxWords >= 300) {
-    return 1;
-  }
-  return 0;
-};
+export const longestStreakLevels = [2, 3, 7, 14, 28, 50, Number.MAX_SAFE_INTEGER];
 
-export const getLevelTotalWords = (totalWords) => {
-  if (totalWords >= 250000) {
-    return 6;
-  } else if (totalWords >= 100000) {
-    return 5;
-  } else if (totalWords >= 50000) {
-    return 4;
-  } else if (totalWords >= 25000) {
-    return 3;
-  } else if (totalWords >= 10000) {
-    return 2;
-  } else if (totalWords >= 1000) {
-    return 1;
-  }
-  return 0;
-};
+export const getLevelLongestStreak = longestStreak =>
+  getGreaterIndex(longestStreakLevels, longestStreak);
+
+export const maxWordLevels = [300, 500, 750, 1000, 1500, 2500, Number.MAX_SAFE_INTEGER];
+
+export const getLevelMaxWords = maxWords =>
+  getGreaterIndex(maxWordLevels, maxWords);
+
+export const totalWordLevels = [1000, 10000, 25000, 50000, 100000, 250000, Number.MAX_SAFE_INTEGER];
+
+export const getLevelTotalWords = totalWords =>
+  getGreaterIndex(totalWordLevels, totalWords);
 
 export const getLevelText = level => levels[level];
 

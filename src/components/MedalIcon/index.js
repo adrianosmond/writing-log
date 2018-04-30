@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Gradient = (props) => {
-  if (props.level !== '6') {
+  if (props.level !== 6) {
     return null;
   }
   return (

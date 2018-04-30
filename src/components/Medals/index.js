@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import {
   getLevelLongestStreak,
@@ -22,9 +22,9 @@ class Medals extends Component {
   constructor(props) {
     super(props);
 
-    this.props.loadLongestStreak(this.props.user);
-    this.props.loadMaxWords(this.props.user);
-    this.props.loadTotalWords(this.props.user);
+    props.loadLongestStreak(props.user);
+    props.loadMaxWords(props.user);
+    props.loadTotalWords(props.user);
   }
 
   render() {
@@ -42,14 +42,14 @@ class Medals extends Component {
       <section className="medals">
         <h1 className="medals__heading">
           Medals
-          {/* <Link to="/medals/" className="medals__all-medals-link">View all medals</Link> */}
+          <Link to="/medals/" className="medals__all-medals-link">View all medals</Link>
         </h1>
         <div className="medals__wrapper">
-          <Medal title="Streak" type="streak"
+          <Medal title="Streak" type="longestStreak"
             level={getLevelLongestStreak(longestStreak)} detail={`${longestStreak} day${longestStreak === 1 ? '' : 's'}`} />
-          <Medal title="Max words" type="max-words"
+          <Medal title="Max words" type="maxWords"
             level={getLevelMaxWords(max)} detail={`${max} word${max === 1 ? '' : 's'}`} />
-          <Medal title="Total words" type="total-words"
+          <Medal title="Total words" type="totalWords"
             level={getLevelTotalWords(total)} detail={`${total} word${total === 1 ? '' : 's'}`} />
         </div>
       </section>
