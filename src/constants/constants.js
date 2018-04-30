@@ -23,7 +23,7 @@ export const DAYS_IN_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
 export const DAYS_OF_WEEK = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-export const levelTypes = [
+export const MEDAL_LEVEL_NAMES = [
   'Paper',
   'Wood',
   'Bronze',

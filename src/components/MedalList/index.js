@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Medal from '../Medal';
 
 import { loadLongestStreak, loadMaxWords, loadTotalWords } from '../../actions/words';
-import { levelTypes, LONGEST_STREAK_LEVELS, TOTAL_WORD_LEVELS, MAX_WORD_LEVELS } from '../../constants/constants';
+import { MEDAL_LEVEL_NAMES, LONGEST_STREAK_LEVELS, TOTAL_WORD_LEVELS, MAX_WORD_LEVELS } from '../../constants/constants';
 
 import './index.css';
 
@@ -58,7 +58,7 @@ class MedalList extends Component {
                 {medal.values.map((score, index) => {
                   if (this.props[key] >= score) {
                     return <Medal key={score} type={key}
-                              title={levelTypes[index]}
+                              title={MEDAL_LEVEL_NAMES[index]}
                               level={index + 1}
                               detail={`${score} ${medal.unit}${medal.unit === 1 ? '' : 's'}`} />;
                   }
