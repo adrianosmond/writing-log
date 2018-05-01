@@ -120,14 +120,14 @@ class Calendar extends Component {
         <h1 className="calendar__heading">Calendar</h1>
         <div className="calendar__wrapper">
           <div className="calendar__month">
-            <button onClick={this.previousMonth}
+            <button onClick={this.previousMonth.bind(this)}
               className="calendar__change-month calendar__change-month--prev"
               disabled={this.state.currentMonth === this.state.earliestMonth &&
                 this.state.currentYear === this.state.earliestYear}>&lt;</button>
             <div className="calendar__month-name">
               {getMonth(this.state.currentMonth)} {this.state.currentYear}
             </div>
-            <button onClick={this.nextMonth}
+            <button onClick={this.nextMonth.bind(this)}
               className="calendar__change-month calendar__change-month--next"
               disabled={this.state.currentMonth === this.state.latestMonth &&
                 this.state.currentYear === this.state.latestYear}>&gt;</button>
