@@ -32,11 +32,11 @@ class Calendar extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    const { wordCount } = newProps;
-    if (wordCount) {
-      const earliestMonth = new Date(Object.keys(wordCount)[0]);
+    const { wordCounts } = newProps;
+    if (wordCounts) {
+      const earliestMonth = new Date(Object.keys(wordCounts)[0]);
       this.setState({
-        writingDates: wordCount,
+        writingDates: wordCounts,
         earliestMonth: earliestMonth.getMonth(),
         earliestYear: earliestMonth.getFullYear(),
       });
@@ -161,7 +161,7 @@ class Calendar extends Component {
 
 const mapStateToProps = state => ({
   user: state.session.user,
-  wordCount: state.stats.wordCounts,
+  wordCounts: state.stats.wordCounts,
 });
 
 const mapDispatchToProps = dispatch => ({

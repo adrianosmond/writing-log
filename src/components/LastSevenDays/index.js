@@ -20,6 +20,25 @@ const makeLastSevenDays = () => {
   return lastSeven;
 };
 
+const createStateFromWordCounts = (wordCounts) => {
+  const lastSevenDays = makeLastSevenDays().map(day => ({
+    date: day.date,
+    wordCount: wordCounts[day.date] || 0,
+  }));
+
+  // TODO - Streak won't go above 8 days with this implementation
+  return {
+    lastSevenDays,
+    streak: (lastSevenDays[0].wordCount > GOAL_TARGET ? 1 : 0) +
+      lastSevenDays.slice(1).reverse().reduce((val, curr) => {
+        if (curr.wordCount > GOAL_TARGET) {
+          return val + 1;
+        }
+        return 0;
+      }, 0),
+  };
+};
+
 const Day = props =>
   <div>
     <div className="last-seven-days__day-initial">{props.dayName}</div>
@@ -29,31 +48,13 @@ const Day = props =>
 class LastSevenDays extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      lastSevenDays: makeLastSevenDays(),
-      streak: 0,
-    };
-
+    this.state = createStateFromWordCounts(props.wordCounts);
     props.loadLastSevenDays(props.user);
   }
 
   componentWillReceiveProps(newProps) {
-    const lastSevenDays = this.state.lastSevenDays.map(day => ({
-      date: day.date,
-      wordCount: newProps.wordCount[day.date] || 0,
-    }));
-
-    // TODO - Streak won't go above 8 days with this implementation
-    this.setState({
-      lastSevenDays,
-      streak: (lastSevenDays[0].wordCount > GOAL_TARGET ? 1 : 0) +
-        lastSevenDays.slice(1).reverse().reduce((val, curr) => {
-          if (curr.wordCount > GOAL_TARGET) {
-            return val + 1;
-          }
-          return 0;
-        }, 0),
-    });
+    this.setState(createStateFromWordCounts(newProps.wordCounts));
+    // this.updateWordCounts(newProps.wordCounts);
   }
 
   render() {
@@ -93,7 +94,7 @@ class LastSevenDays extends Component {
 
 const mapStateToProps = state => ({
   user: state.session.user,
-  wordCount: state.stats.wordCounts,
+  wordCounts: state.stats.wordCounts,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -32,10 +32,10 @@ class Medals extends Component {
       longestStreak,
       maxWords,
       totalWords,
-      wordCount,
+      wordCounts,
       writingDate,
     } = this.props;
-    const wordsToday = wordCount[writingDate] || 0;
+    const wordsToday = wordCounts[writingDate] || 0;
     const max = Math.max(maxWords, wordsToday);
     const total = totalWords + wordsToday;
     return (
@@ -60,7 +60,7 @@ class Medals extends Component {
 
 const mapStateToProps = state => ({
   user: state.session.user,
-  wordCount: state.stats.wordCounts,
+  wordCounts: state.stats.wordCounts,
   longestStreak: state.stats.longestStreak,
   maxWords: state.stats.maxWords,
   totalWords: state.stats.totalWords,
