@@ -12,7 +12,7 @@ import {
   loadLongestStreak,
   loadMaxWords,
   loadTotalWords,
-} from '../../actions/words';
+} from '../../actions/stats';
 
 import Medal from '../Medal';
 
@@ -60,10 +60,10 @@ class Medals extends Component {
 
 const mapStateToProps = state => ({
   user: state.session.user,
-  wordCount: state.words.wordCount,
-  longestStreak: state.words.longestStreak,
-  maxWords: state.words.maxWords,
-  totalWords: state.words.totalWords,
+  wordCount: state.stats.wordCounts,
+  longestStreak: state.stats.longestStreak,
+  maxWords: state.stats.maxWords,
+  totalWords: state.stats.totalWords,
 });
 
 const mapDispatchToProps = dispatch => ({

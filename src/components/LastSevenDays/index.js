@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { loadWordCounts } from '../../actions/words';
+import { loadWordCounts } from '../../actions/stats';
 import { getDayInitial, makeDateString } from '../../constants/utils';
 import { PARTIAL_GOAL_TARGET, GOAL_TARGET, DAY_IN_MS } from '../../constants/constants';
 
@@ -93,7 +93,7 @@ class LastSevenDays extends Component {
 
 const mapStateToProps = state => ({
   user: state.session.user,
-  wordCount: state.words.wordCount,
+  wordCount: state.stats.wordCounts,
 });
 
 const mapDispatchToProps = dispatch => ({

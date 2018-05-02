@@ -6,9 +6,12 @@ import {
   loadWords,
   setWords,
   saveWords,
+} from '../../actions/words';
+
+import {
   setWordCount,
   saveWordCount,
-} from '../../actions/words';
+} from '../../actions/stats';
 
 import './index.css';
 

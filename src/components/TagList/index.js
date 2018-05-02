@@ -20,9 +20,6 @@ class AllTags extends Component {
       return null;
     }
     const today = makeDateString(new Date());
-    const link = this.props.tagName ?
-      <Link to={routes.TAGS} className="tag-list__all-tags-link">View all tags</Link>
-      : null;
     return (
       <section className="tag-list">
         <h1 className="tag-list__heading">Tags</h1>
@@ -44,7 +41,8 @@ class AllTags extends Component {
             </div>
           );
         })}
-        {link}
+        { this.props.tagName &&
+          <Link to={routes.TAGS} className="tag-list__all-tags-link">View all tags</Link> }
       </section>
     );
   }

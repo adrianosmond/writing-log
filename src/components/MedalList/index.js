@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Medal from '../Medal';
 
-import { loadLongestStreak, loadMaxWords, loadTotalWords } from '../../actions/words';
+import { loadLongestStreak, loadMaxWords, loadTotalWords } from '../../actions/stats';
 import { MEDAL_LEVEL_NAMES, LONGEST_STREAK_LEVELS, TOTAL_WORD_LEVELS, MAX_WORD_LEVELS } from '../../constants/constants';
 
 import './index.css';
@@ -43,10 +43,6 @@ class MedalList extends Component {
     props.loadTotalWords(props.user);
   }
 
-  componentWillReceiveProps(newProps) {
-    console.log(newProps);
-  }
-
   render() {
     return (
       <section className="medal-list">
@@ -81,9 +77,9 @@ class MedalList extends Component {
 
 const mapStateToProps = state => ({
   user: state.session.user,
-  longestStreak: state.words.longestStreak,
-  maxWords: state.words.maxWords,
-  totalWords: state.words.totalWords,
+  longestStreak: state.stats.longestStreak,
+  maxWords: state.stats.maxWords,
+  totalWords: state.stats.totalWords,
 });
 
 const mapDispatchToProps = dispatch => ({

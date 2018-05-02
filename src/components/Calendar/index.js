@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { loadWordCounts } from '../../actions/words';
+import { loadWordCounts } from '../../actions/stats';
 
 import {
   getMonth,
@@ -161,7 +161,7 @@ class Calendar extends Component {
 
 const mapStateToProps = state => ({
   user: state.session.user,
-  wordCount: state.words.wordCount,
+  wordCount: state.stats.wordCounts,
 });
 
 const mapDispatchToProps = dispatch => ({
