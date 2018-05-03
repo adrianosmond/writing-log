@@ -6,6 +6,8 @@ import { loadWordCounts } from '../../actions/stats';
 import { getDayInitial, makeDateString } from '../../constants/utils';
 import { PARTIAL_GOAL_TARGET, GOAL_TARGET, DAY_IN_MS } from '../../constants/constants';
 
+import * as routes from '../../constants/routes';
+
 import './index.css';
 
 const makeLastSevenDays = () => {
@@ -73,7 +75,7 @@ class LastSevenDays extends Component {
               className += ' last-seven-days__day--goal-met';
             }
             return day.wordCount > 0 || idx === 0 ? (
-              <Link to={idx === 0 ? '/log/' : `/log/${day.date}`}
+              <Link to={idx === 0 ? routes.WRITING : `${routes.WRITING}/${day.date}`}
                 className={className} key={day.date}>
                 <Day dayName={getDayInitial(day.date)} wordCount={day.wordCount} />
               </Link>

@@ -33,7 +33,7 @@ class AllTags extends Component {
               <ul className="tag-list__list">
                 {Object.keys(this.props.tags[tag]).map(val => (
                   <li key={val} className="tag-list__list-item">
-                    <Link to={`${routes.LOGGED_IN}${val === today ? '' : `/${val}`}`}
+                    <Link to={`${routes.WRITING}${val === today ? '' : `/${val}`}`}
                         className="tag-list__tag-link">{makeDateText(val)}</Link>
                   </li>
                 ))}

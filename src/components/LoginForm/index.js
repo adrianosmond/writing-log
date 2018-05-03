@@ -38,7 +38,7 @@ class LoginForm extends Component {
     auth.signInWithEmailAndPassword(this.state.email, this.state.password)
       .then(() => {
         this.setState(() => ({ ...INITIAL_STATE }));
-        this.props.history.push(routes.LOGGED_IN);
+        this.props.history.push(routes.WRITING);
       })
       .catch((error) => {
         this.setState({

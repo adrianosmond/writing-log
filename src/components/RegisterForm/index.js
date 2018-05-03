@@ -47,7 +47,7 @@ class RegisterForm extends Component {
     auth.createUserWithEmailAndPassword(this.state.email, this.state.password1)
       .then(() => {
         this.setState(() => ({ ...INITIAL_STATE }));
-        this.props.history.push(routes.LOGGED_IN);
+        this.props.history.push(routes.WRITING);
       })
       .catch((error) => {
         this.setState({

@@ -11,6 +11,8 @@ import {
   padWithZero,
 } from '../../constants/utils';
 
+import * as routes from '../../constants/routes';
+
 import './index.css';
 
 const writingData = (wordCounts) => {
@@ -138,11 +140,13 @@ class Calendar extends Component {
 
   renderDay(day) {
     if (day.date === this.state.dateToday) {
-      return <Link key={day.key} to="/log/" className="calendar__day calendar__day--today">{day.day}</Link>;
+      return <Link key={day.key} to={routes.WRITING}
+        className="calendar__day calendar__day--today">{day.day}</Link>;
     }
 
     if (this.state.writingDates[day.date]) {
-      return <Link key={day.key} to={`/log/${day.date}`} className="calendar__day calendar__day--active">{day.day}</Link>;
+      return <Link key={day.key} to={`/${routes.WRITING}/${day.date}`}
+        className="calendar__day calendar__day--active">{day.day}</Link>;
     }
 
     return <div key={day.key} className={day.classes}>{day.day}</div>;

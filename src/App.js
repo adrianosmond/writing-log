@@ -21,7 +21,7 @@ const App = () =>
       <Router>
         <Switch>
           <Route exact path={routes.NOT_LOGGED_IN} component={NotLoggedIn} />
-          <Route path={`${routes.LOGGED_IN}/:writingDate?`} component={Log} />
+          <Route path={`${routes.WRITING}/:writingDate?`} component={Log} />
           <Route path={`${routes.TAGS}/:tagName?`} component={AllTags} />
           <Route path={routes.MEDALS} component={AllMedals} />
           <Route path={routes.PASSWORD_RESET} component={PasswordReset} />
