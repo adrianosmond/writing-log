@@ -17,7 +17,7 @@ import './index.css';
 const Log = ({ match }) => {
   const writingDate = match.params.writingDate || makeDateString(new Date());
   return (
-    <article className="app grid app-content">
+    <article className="grid">
       <main className="app__main grid__col-sm-8">
         <LogWriting writingDate={writingDate} />
       </main>

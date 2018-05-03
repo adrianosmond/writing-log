@@ -4,7 +4,7 @@ import withAuthorization from '../../withAuthorization';
 import MedalList from '../../components/MedalList';
 
 const AllMedals = () =>
-  <article className="app grid app-content">
+  <article className="grid">
     <main className="app__main grid__col-sm-12">
       <MedalList />
     </main>

@@ -6,7 +6,7 @@ import TagList from '../../components/TagList';
 const AllTags = ({ match }) => {
   const tagName = match.params.tagName || '';
   return (
-    <article className="app grid app-content">
+    <article className="grid">
       <main className="app__main grid__col-sm-12">
         <TagList tagName={tagName} />
       </main>
