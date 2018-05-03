@@ -13,6 +13,25 @@ import {
 
 import './index.css';
 
+const calendarData = (wordCounts) => {
+  const dates = Object.keys(wordCounts);
+  if (dates.length === 0) {
+    return {
+      writingDates: {},
+      earliestMonth: 0,
+      earliestYear: 0,
+    };
+  }
+
+  const earliestDate = new Date(dates[0]);
+
+  return {
+    writingDates: wordCounts,
+    earliestMonth: earliestDate.getMonth(),
+    earliestYear: earliestDate.getFullYear(),
+  };
+};
+
 class Calendar extends Component {
   constructor(props) {
     super(props);
@@ -23,24 +42,16 @@ class Calendar extends Component {
       currentYear: date.getFullYear(),
       latestMonth: date.getMonth(),
       latestYear: date.getFullYear(),
-      earliestMonth: 0,
-      earliestYear: 0,
       daysInMonth: Calendar.calculateDays(date.getMonth(), date.getFullYear()),
-      writingDates: {},
+      ...calendarData(props.wordCounts),
     };
+
+
     this.props.loadWordCounts(this.props.user);
   }
 
   componentWillReceiveProps(newProps) {
-    const { wordCounts } = newProps;
-    if (wordCounts) {
-      const earliestMonth = new Date(Object.keys(wordCounts)[0]);
-      this.setState({
-        writingDates: wordCounts,
-        earliestMonth: earliestMonth.getMonth(),
-        earliestYear: earliestMonth.getFullYear(),
-      });
-    }
+    this.setState(calendarData(newProps.wordCounts));
   }
 
   static calculateDays(month, year) {
