@@ -13,7 +13,7 @@ import {
 
 import './index.css';
 
-const calendarData = (wordCounts) => {
+const writingData = (wordCounts) => {
   const dates = Object.keys(wordCounts);
   if (dates.length === 0) {
     return {
@@ -32,67 +32,68 @@ const calendarData = (wordCounts) => {
   };
 };
 
+const createDays = (month, year) => {
+  let i;
+  const days = [];
+  const monthStr = padWithZero(month + 1);
+  const numDaysFromPrevMonth = new Date(`${year}-${monthStr}-01`).getDay() - 1;
+
+  if (numDaysFromPrevMonth > 0) {
+    const prevMonth = month - 1 === -1 ? 11 : month - 1;
+    const prevYear = month - 1 === -1 ? year - 1 : year;
+    const numDaysInPrevMonth = getNumDaysInMonth(prevMonth, prevYear);
+
+    for (i = numDaysInPrevMonth - numDaysFromPrevMonth; i < numDaysInPrevMonth; i += 1) {
+      days.push({
+        day: i,
+        key: `${i}-${prevMonth}`,
+        classes: 'calendar__day calendar__day--different-month',
+      });
+    }
+  }
+
+  for (i = 1; i <= getNumDaysInMonth(month, year); i += 1) {
+    const dayStr = padWithZero(i);
+    days.push({
+      day: i,
+      date: `${year}-${monthStr}-${dayStr}`,
+      key: `${i}-${month}`,
+      classes: 'calendar__day',
+    });
+  }
+
+  for (i = 1; days.length % 7 !== 0; i += 1) {
+    days.push({
+      day: i,
+      key: `${i}-${month + 1}`,
+      classes: 'calendar__day calendar__day--different-month',
+    });
+  }
+
+  return days;
+};
+
 class Calendar extends Component {
   constructor(props) {
     super(props);
-    const date = new Date();
-    this.state = {
-      dateToday: makeDateString(date),
-      currentMonth: date.getMonth(),
-      currentYear: date.getFullYear(),
-      latestMonth: date.getMonth(),
-      latestYear: date.getFullYear(),
-      daysInMonth: Calendar.calculateDays(date.getMonth(), date.getFullYear()),
-      ...calendarData(props.wordCounts),
-    };
 
+    const today = new Date();
+
+    this.state = {
+      dateToday: makeDateString(today),
+      currentMonth: today.getMonth(),
+      currentYear: today.getFullYear(),
+      latestMonth: today.getMonth(),
+      latestYear: today.getFullYear(),
+      daysInMonth: createDays(today.getMonth(), today.getFullYear()),
+      ...writingData(props.wordCounts),
+    };
 
     this.props.loadWordCounts(this.props.user);
   }
 
   componentWillReceiveProps(newProps) {
-    this.setState(calendarData(newProps.wordCounts));
-  }
-
-  static calculateDays(month, year) {
-    let i;
-    const days = [];
-    const monthStr = padWithZero(month + 1);
-    const numDaysFromPrevMonth = new Date(`${year}-${monthStr}-01`).getDay() - 1;
-
-    if (numDaysFromPrevMonth > 0) {
-      const prevMonth = month - 1 === -1 ? 11 : month - 1;
-      const prevYear = month - 1 === -1 ? year - 1 : year;
-      const numDaysInPrevMonth = getNumDaysInMonth(prevMonth, prevYear);
-
-      for (i = numDaysInPrevMonth - numDaysFromPrevMonth; i < numDaysInPrevMonth; i += 1) {
-        days.push({
-          day: i,
-          key: `${i}-${prevMonth}`,
-          classes: 'calendar__day calendar__day--different-month',
-        });
-      }
-    }
-
-    for (i = 1; i <= getNumDaysInMonth(month, year); i += 1) {
-      const dayStr = padWithZero(i);
-      days.push({
-        day: i,
-        date: `${year}-${monthStr}-${dayStr}`,
-        key: `${i}-${month}`,
-        classes: 'calendar__day',
-      });
-    }
-
-    for (i = 1; days.length % 7 !== 0; i += 1) {
-      days.push({
-        day: i,
-        key: `${i}-${month + 1}`,
-        classes: 'calendar__day calendar__day--different-month',
-      });
-    }
-
-    return days;
+    this.setState(writingData(newProps.wordCounts));
   }
 
   previousMonth() {
@@ -106,7 +107,7 @@ class Calendar extends Component {
     this.setState({
       currentMonth: m,
       currentYear: y,
-      daysInMonth: Calendar.calculateDays(m, y),
+      daysInMonth: createDays(m, y),
     });
   }
 
@@ -121,8 +122,30 @@ class Calendar extends Component {
     this.setState({
       currentMonth: m,
       currentYear: y,
-      daysInMonth: Calendar.calculateDays(m, y),
+      daysInMonth: createDays(m, y),
     });
+  }
+
+  showingEarliestMonth() {
+    return this.state.currentMonth === this.state.earliestMonth &&
+            this.state.currentYear === this.state.earliestYear;
+  }
+
+  showingLatestMonth() {
+    return this.state.currentMonth === this.state.latestMonth &&
+            this.state.currentYear === this.state.latestYear;
+  }
+
+  renderDay(day) {
+    if (day.date === this.state.dateToday) {
+      return <Link key={day.key} to="/log/" className="calendar__day calendar__day--today">{day.day}</Link>;
+    }
+
+    if (this.state.writingDates[day.date]) {
+      return <Link key={day.key} to={`/log/${day.date}`} className="calendar__day calendar__day--active">{day.day}</Link>;
+    }
+
+    return <div key={day.key} className={day.classes}>{day.day}</div>;
   }
 
   render() {
@@ -133,36 +156,20 @@ class Calendar extends Component {
           <div className="calendar__month">
             <button onClick={this.previousMonth.bind(this)}
               className="calendar__change-month calendar__change-month--prev"
-              disabled={this.state.currentMonth === this.state.earliestMonth &&
-                this.state.currentYear === this.state.earliestYear}>&lt;</button>
+              disabled={this.showingEarliestMonth()}>&lt;</button>
             <div className="calendar__month-name">
               {getMonth(this.state.currentMonth)} {this.state.currentYear}
             </div>
             <button onClick={this.nextMonth.bind(this)}
               className="calendar__change-month calendar__change-month--next"
-              disabled={this.state.currentMonth === this.state.latestMonth &&
-                this.state.currentYear === this.state.latestYear}>&gt;</button>
+              disabled={this.showingLatestMonth()}>&gt;</button>
           </div>
           <div className="calendar__weekdays">
-            <div className="calendar__weekday">M</div>
-            <div className="calendar__weekday">T</div>
-            <div className="calendar__weekday">W</div>
-            <div className="calendar__weekday">T</div>
-            <div className="calendar__weekday">F</div>
-            <div className="calendar__weekday">S</div>
-            <div className="calendar__weekday">S</div>
+            {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((day, idx) =>
+              <div className="calendar__weekday" key={idx}>{day}</div>)}
           </div>
           <div className="calendar__days">
-            {this.state.daysInMonth.map((day) => {
-              if (day.date === this.state.dateToday) {
-                return <Link key={day.key} to="/log/"
-                          className="calendar__day calendar__day--today">{day.day}</Link>;
-              } else if (this.state.writingDates[day.date]) {
-                return <Link key={day.key} to={`/log/${day.date}`}
-                          className="calendar__day calendar__day--active">{day.day}</Link>;
-              }
-              return <div key={day.key} className={day.classes}>{day.day}</div>;
-            })}
+            {this.state.daysInMonth.map(this.renderDay.bind(this))}
           </div>
         </div>
       </section>
