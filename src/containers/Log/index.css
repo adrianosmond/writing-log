@@ -2,7 +2,10 @@
 
 .app {}
 
-.app__sidebar {
-  height: calc(100vh - var(--nav-height));
-  overflow-y: scroll;
+
+@media (min-width: 768px) {
+  .app__sidebar {
+    height: calc(100vh - var(--nav-height));
+    overflow-y: scroll;
+  }
 }
