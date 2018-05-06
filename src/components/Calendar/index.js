@@ -145,7 +145,7 @@ class Calendar extends Component {
     }
 
     if (this.state.writingDates[day.date]) {
-      return <Link key={day.key} to={`/${routes.WRITING}/${day.date}`}
+      return <Link key={day.key} to={`${routes.WRITING}/${day.date}`}
         className="calendar__day calendar__day--active">{day.day}</Link>;
     }
 

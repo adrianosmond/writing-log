@@ -66,13 +66,13 @@ class LastSevenDays extends Component {
         <h1 className="last-seven-days__heading">Last 7 Days</h1>
         <div className="last-seven-days__wrapper">
           {lastSevenDays.map((day, idx) => {
-            let className = 'last-seven-days__day';
+            let className = 'last-seven-days__day last-seven-days__day--goal-';
             if (day.wordCount < PARTIAL_GOAL_TARGET) {
-              className += ' last-seven-days__day--goal-not-met';
+              className += 'not-met';
             } else if (day.wordCount < GOAL_TARGET) {
-              className += ' last-seven-days__day--goal-nearly-met';
+              className += 'nearly-met';
             } else {
-              className += ' last-seven-days__day--goal-met';
+              className += 'met';
             }
             return day.wordCount > 0 || idx === 0 ? (
               <Link to={idx === 0 ? routes.WRITING : `${routes.WRITING}/${day.date}`}
