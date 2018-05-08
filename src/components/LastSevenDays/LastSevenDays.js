@@ -47,6 +47,16 @@ const Day = props =>
     <div className="last-seven-days__num-words">{props.wordCount}</div>
   </div>;
 
+const makeClassName = (wordCount) => {
+  const className = 'last-seven-days__day last-seven-days__day--goal';
+  if (wordCount < PARTIAL_GOAL_TARGET) {
+    return `${className}-not-met`;
+  } else if (wordCount < GOAL_TARGET) {
+    return `${className}-nearly-met`;
+  }
+  return `${className}-met`;
+};
+
 class LastSevenDays extends Component {
   constructor(props) {
     super(props);
@@ -56,7 +66,6 @@ class LastSevenDays extends Component {
 
   componentWillReceiveProps(newProps) {
     this.setState(createStateFromWordCounts(newProps.wordCounts));
-    // this.updateWordCounts(newProps.wordCounts);
   }
 
   render() {
@@ -66,14 +75,7 @@ class LastSevenDays extends Component {
         <h1 className="last-seven-days__heading">Last 7 Days</h1>
         <div className="last-seven-days__wrapper">
           {lastSevenDays.map((day, idx) => {
-            let className = 'last-seven-days__day last-seven-days__day--goal-';
-            if (day.wordCount < PARTIAL_GOAL_TARGET) {
-              className += 'not-met';
-            } else if (day.wordCount < GOAL_TARGET) {
-              className += 'nearly-met';
-            } else {
-              className += 'met';
-            }
+            const className = makeClassName(day.wordCount);
             return day.wordCount > 0 || idx === 0 ? (
               <Link to={idx === 0 ? routes.WRITING : `${routes.WRITING}/${day.date}`}
                 className={className} key={day.date}>
