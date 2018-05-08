@@ -13,7 +13,7 @@ import {
 
 import * as routes from '../../constants/routes';
 
-import './index.css';
+import './Calendar.css';
 
 const writingData = (wordCounts) => {
   const dates = Object.keys(wordCounts);

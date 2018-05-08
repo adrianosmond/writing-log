@@ -12,7 +12,7 @@ import Medals from '../../components/Medals';
 
 import { makeDateString } from '../../constants/utils';
 
-import './index.css';
+import './Log.css';
 
 const Log = ({ match }) => {
   const writingDate = match.params.writingDate || makeDateString(new Date());

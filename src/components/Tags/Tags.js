@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { loadTagsForDate, addTag, removeTag } from '../../actions/tags';
 import * as routes from '../../constants/routes';
 
-import './index.css';
+import './Tags.css';
 
 class Tags extends Component {
   constructor(props) {

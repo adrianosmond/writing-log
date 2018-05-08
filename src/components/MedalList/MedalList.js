@@ -6,7 +6,7 @@ import Medal from '../Medal';
 import { loadLongestStreak, loadMaxWords, loadTotalWords } from '../../actions/stats';
 import { MEDAL_LEVEL_NAMES, LONGEST_STREAK_LEVELS, TOTAL_WORD_LEVELS, MAX_WORD_LEVELS } from '../../constants/constants';
 
-import './index.css';
+import './MedalList.css';
 
 class MedalList extends Component {
   constructor(props) {

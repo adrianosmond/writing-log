@@ -16,7 +16,7 @@ import {
 
 import Medal from '../Medal';
 
-import './index.css';
+import './Medals.css';
 
 class Medals extends Component {
   constructor(props) {

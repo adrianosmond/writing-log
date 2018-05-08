@@ -8,7 +8,7 @@ import { PARTIAL_GOAL_TARGET, GOAL_TARGET, DAY_IN_MS } from '../../constants/con
 
 import * as routes from '../../constants/routes';
 
-import './index.css';
+import './LastSevenDays.css';
 
 const makeLastSevenDays = () => {
   const now = new Date();

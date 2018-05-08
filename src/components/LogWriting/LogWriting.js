@@ -13,7 +13,7 @@ import {
   saveWordCount,
 } from '../../actions/stats';
 
-import './index.css';
+import './LogWriting.css';
 
 class LogWriting extends Component {
   constructor(props) {

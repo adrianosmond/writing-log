@@ -7,7 +7,7 @@ import { loadAllTags } from '../../actions/tags';
 import { makeDateString, makeDateText } from '../../constants/utils';
 import * as routes from '../../constants/routes';
 
-import './index.css';
+import './TagList.css';
 
 class AllTags extends Component {
   constructor(props) {
